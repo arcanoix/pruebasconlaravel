@@ -187,3 +187,7 @@ Route::get('/pizarra/{id}', function($id){
 
 
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
