@@ -18,7 +18,7 @@ class Actividad extends Model
     }
 
     public function respondidas(){
-    	return $this->hasMany(Respondidas::class);
+    	return $this->belongsTo(Respondidas::class,'actividad_respondida','id');
     }
 
     public function unidad(){

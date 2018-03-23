@@ -16,7 +16,7 @@ class Respondidas extends Model
 
     public function actividad()
     {
-    	return $this->belongsToMany(Actividad::class,'actividad_respondida','actividad_id');
+    	return $this->belongsTo(Actividad::class);
     }
 
 
@@ -34,6 +34,8 @@ class Respondidas extends Model
     public function materia(){
         return $this->hasMany(Materia::class,'id','materia_id');
     }
+
+   
 
 
 

@@ -18,103 +18,112 @@
             <h1>No existe actividades asignadas a alumnos registrados en esta materia</h1>
       </div>
   @else
-        <div class="col-md-6">
+                    <div class="row">
+                            <div class="col-md-12">
+                          
+                                        <h1>Unidad 1</h1>
+                                                <table class="table table-bordered">
+                                                  @if(count($ac1) > 0)
+                                                  
+                                                    <tbody>
 
-                <h1>Unidad 1</h1>
-                        <table class="table table-bordered">
-                          <tbody>
-
-                            <th>Alumnos</th>
-
-                            @foreach($act1 as $act)
-                                <th>{{ $act->name }}</th>
-                            @endforeach
-
-                            @foreach($alum as $alu)
-                              <tr>
-                                  <td>{{ $alu->name }}</td>
-                                      @for($k=0;$k<=4;$k++)
-
-                                        <td >
-                                          <i class="<?php echo ($alu->respondida[$k]['status']==1) ? 'si fa fa-check-square-o' : 'no fa fa-minus-square-o'; ?>"></i>
-
-                                        </td>
-
-
-                                      @endfor
-                              </tr>
-                            @endforeach
-
-
-                          </tbody>
-                        </table>
-
-        </div>
-
-          <div class="row">
-            <div class="col-md-6">
-
-                    <h1>Unidad 2</h1>
-                            <table class="table table-bordered">
-                              <tbody>
-
-                                <th>Alumnos</th>
-
-                                @foreach($act2 as $act)
-                                    <th>{{ $act->name }}</th>
-                                @endforeach
-
-                                @foreach($alum as $alu)
-                                  <tr>
-                                        <td>{{ $alu->name }}</td>
-                                    @for($k=5;$k<=9;$k++)
-                                      <td >
-                                        <i class="<?php echo ($alu->respondida[$k]['status']==1) ? 'si fa fa-check-square-o' : 'no fa fa-minus-square-o'; ?>"></i>
-
-                                      </td>
-                                    @endfor
-                                  </tr>
-                                @endforeach
+                                                      <th>Alumnos</th>
+                                                    
+                                                      @foreach($ac1 as $key=>$act)
+                                                          <th>{{ $act->name}}</th>
+                                                        
+                                                      @endforeach
+                                                    
+                                                      @foreach($alum as $alu)
+                                                        <tr>
+                                                        <!-- 0 a 4 -->
+                                                            <td>{{ $alu->name }}</td>
+                                                                @for($k=0;$k<=$act1;$k++)                     
+                                                                  <td >
+                                                                  <i class="<?php echo ( $alu->respondida[$k]['status'] == 2 ? 'fas fa-ban' : ($alu->respondida[$k]['status'] == 1 ? 'fas fa-check' : 'fas fa-minus')  ); ?>">{{ $alu->respondida[$k]['status'] }}</i>
+                                                                  </td>
+                                                                @endfor
+                                                        </tr>
+                                                      @endforeach
+                                                    </tbody>
+                                                  @endif
+                                                </table>
+                                  </div>
+                    
 
 
-                              </tbody>
-                            </table>
-
-            </div>
-
-
-
-          </div>
-
-          <div class="row">
-
-                        <div class="col-md-6">
-
-                                <h1>Unidad 3</h1>
-                                        <table class="table table-bordered">
+                              <div class="col-md-12">
+                          
+                                   <h1>Unidad 2</h1>
+                                  <table class="table table-bordered">
+                                        @if(count($ac2) > 0)
+                                        
                                           <tbody>
 
                                             <th>Alumnos</th>
-                                                @foreach($act3 as $act)
-                                                    <th><i class="glyphicon glyphicon-ok"></i>{{ $act->name }}</th>
-                                                @endforeach
-
-                                                @foreach($alum as $alu)
-                                                  <tr>
-                                                        <td>{{ $alu->name }}</td>
-                                                    @for($k=10;$k<=14;$k++)
-                                                      <td >
-                                                        <i class="<?php echo ($alu->respondida[$k]['status']==1) ? 'si fa fa-check-square-o' : 'no fa fa-minus-square-o'; ?>"></i>
-
-                                                      </td>
-                                                    @endfor
-                                                  </tr>
-                                              @endforeach
+                                          
+                                            @foreach($ac2 as $key=>$act)
+                                                <th>{{ $act->name}}</th>
+                                                
+                                            @endforeach
+                                          
+                                            @foreach($alum as $alu)
+                                                
+                                              <tr>
+                                                  <td>{{ $alu->name }}</td>
+                                                  <!-- 5 a 9 -->
+                                                      @for($k=5;$k <= $act2;$k++)                     
+                                                        <td >
+                                                        <i class="<?php echo ( $alu->respondida[$k]['status'] == 2 ? 'fas fa-ban' : ($alu->respondida[$k]['status'] == 1 ? 'fas fa-check' : 'fas fa-minus')  ); ?>">{{ $alu->respondida[$k]['status'] }}</i>
+                                                        </td>
+                                                      @endfor
+                                              </tr>
+                                            @endforeach
                                           </tbody>
-                                        </table>
+                                        @endif
+                                  </table>
+                              </div>
+           
+                              <div class="col-md-12">
+                              
+                                   <h1>Unidad 3</h1>
+                                  <table class="table table-bordered">
+                                 
+                                        @if(count($ac3) > 1)
+                                       
+                                          <tbody>
+                               
+                                            <th>Alumnos</th>
+                                            
+                                            @foreach($ac3 as $key=>$act)
+                                                <th>{{ $act->name}}</th>
+                                               
+                                            @endforeach
+                                           
+                                            @foreach($alum as $alu)
+                                          
+                                              <tr>
+                                                  <td>{{ $alu->name }}</td>
+                                                  <!-- 10 a  14 -->
+                                                      @for($k=10;$k <= $act3;$k++)                     
+                                                        <td >
+                                                        <i class="<?php echo ( $alu->respondida[$k]['status'] == 2 ? 'fas fa-ban' : ($alu->respondida[$k]['status'] == 1 ? 'fas fa-check' : 'fas fa-minus')  ); ?>">{{ $alu->respondida[$k]['status'] }}</i>
+                                                        </td>
+                                                      @endfor
+                                              </tr>
+                                            @endforeach
 
-                        </div>
-          </div>
+                                          </tbody>
+
+                                        @endif
+                                  </table>
+                              </div>
+             </div>
+                
+
+         
+         
+         
 @endif
 
 

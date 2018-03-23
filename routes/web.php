@@ -146,43 +146,168 @@ Route::get('/pizarra/{id}', function($id){
 
 
     //$conteo_alu = count($alumnos) -1;
-    $conteo_alu = count($alumnos) -1;
+    $conteo_alu = count($alumnos);
+    $conteo_act = count($actividad);
     
-    //return $conteo_alu;
+    
 
-    
+    /** APLICANDO SWITCH */
+        //return $restando;
+        $restando = 15 - $conteo_act ;
+        switch($restando)
+        {
+            case 1: 
+                $act3 = 15 - $restando; //10 //14
+                $act2 = 9;
+                $act1 = 4;
+                //return($act3);
+            break;
+            case 2:
+                $act3 = 15 - $restando; //10 //14
+                $act2 = 9;
+                $act1 = 4;
+            break;
+            case 3:
+                $act3 = 15 - $restando; //10 //14
+                $act2 = 9;
+                $act1 = 4;
+            break;
+            case 4:
+                $act3 = 15 - $restando; //10 //14
+                $act2 = 9;
+                $act1 = 4;
+            break;
+            case 5:
+                $act2 = 15 - $restando; // 9 //5
+                $act1 = 4;
+                $act3 = 0;
+            break;
+            case 6:
+                $act2 = 15 - $restando; // 9 //5
+                $act1 = 4;
+                $act3 = 0;
+            break;
+            case 7:
+                $act2 = 15 - $restando; // 9 //5
+                $act1 = 4;
+                $act3 = 0;
+            break;
+            case 8:
+                $act2 = 15 - $restando; // 9 //5
+                $act1 = 4;
+                $act3 = 0;
+            break;
+            case 9:
+                $act2 = 15 - $restando; // 9 //5
+                $act1 = 4;
+                $act3 = 0;
+            break;
+            case 10:
+                $act2 = 15 - $restando; // 9 //5
+                $act1 = 4;
+                $act3 = 0;
+            break;
+            case 11:
+               
+                    $res = $restando - 7;
+                    $act1 = $res;
+                    $act2 = 0;
+                    $act3 = 0;
+                
+            break;
+            case 12:
+              
+                    $res = $restando - 9;
+                    $act1 = $res;
+                    $act2 = 0;
+                    $act3 = 0;
+                
+            break;
+            case 13:
+               
+                    $res = $restando - 11;
+                    $act1 = $res;
+                    $act2 = 0;
+                    $act3 = 0;
+                
+            break;
+            case 14:
+               
+                    $res = $restando - 13;
+                    $act1 = $res;
+                    $act2 = 0;
+                    $act3 = 0;
+                
+            break;
+            default:
+                $act3 = 14; //10 //14
+                $act2 = 9;
+                $act1 = 4;
+        }
 
-    
+        //dd($act3);
+           
+        
+          /* return response()->json([
+                'actividad' => $conteo_act,
+                'restando' => $restando,
+                'act1' => $act1,
+                'act2' => $act2,
+                'act3' => $act3,
+                'consulta' => $actividad
+           ]);
+    */
     //return $alum;
 
-    for($a=0; $a<=4;$a++){
-      $act1[] = $actividad[$a];
-    }
+    
 
-    for($b=5;$b<=9;$b++){
-      $act2[]=$actividad[$b];
-    }
+            for($a=0; $a<=$act1;$a++){
+                $ac1[] = $actividad[$a];
+            }
+           
+           if($act2>0){
+            
+                for($b=5;$b<=$act2;$b++){
+                    $ac2[]=$actividad[$b];
+                  
+                }
 
-    for($c=10;$c<=14;$c++){
-      $act3[]=$actividad[$c];
-    }
+           }else{
+             $ac2[]=0;
+           }
+           
+           if($act3 > 0)
+           {
+            //dd($actividad);
+                for($c=10;$c<=$act3;$c++)
+                     {
+                      $ac3[]=$actividad[$c];
+                      
+                    }
 
-    //dd($conteo_alu <= 0);
+           }else{
+                $ac3[]=0;
+           }
+          
+          
 
     if($conteo_alu <= 0){
         $alum=0;
-        return view('pizarra3', compact('alum','act1','act2','act3'));
+        return view('pizarra3', compact('alum','ac1','ac2','ac3','act1','act2','act3'));
     }else{
 
-        for($al=0;$al<=$conteo_alu;$al++){
-            $alum[] = $alumnos[$al]['user'];
-      }
+        for($al=0;$al<$conteo_alu;$al++)
+            {
+                $alum[] = $alumnos[$al]['user'];
+
+            }
 
     }
-   // return $act1;
+    
+    //dd($alum);
+        //return $alum->respondida;
 
-
-    return view('pizarra3', compact('alum','act1','act2','act3'));
+    return view('pizarra3', compact('alum','ac1','ac2','ac3','act1','act2','act3'));
 });
 
 
