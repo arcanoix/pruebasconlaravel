@@ -18,16 +18,17 @@ class CreateAlumnoRespuestaTable extends Migration
             $table->integer('unidad_id')->unsigned();
             $table->integer('tipo_id')->unsigned();
             $table->integer('materia_id')->unsigned();
-            $table->integer('pregunta_id')->unsigned();
-            $table->integer('respondidas_id')->unsigned();
-            $table->integer('correcta_id')->unsigned();
+            $table->string('pregunta_id');
+            $table->string('respondidas_id');
+            $table->string('correcta_id');
+            $table->integer('points');
 
             $table->foreign('alumno_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('unidad_id')->references('id')->on('unidades')->onDelete('cascade');
             $table->foreign('tipo_id')->references('id')->on('tipoeval')->onDelete('cascade');
             $table->foreign('materia_id')->references('id')->on('materias')->onDelete('cascade');
 
-            $table->foreign('pregunta_id')->references('id')->on('preguntas');
+            
         });
     }
 

@@ -73,7 +73,7 @@ class PruebasController extends Controller
 
         $respuesta_correcta = $request->input('correcta_');
 
-        foreach($respondida_alumno as $r){
+       /* foreach($respondida_alumno as $r){
             $respuesta_id = intVal($r);
             $correcta_find = Opcion::where('id', '=', $respuesta_id)->get();
 
@@ -87,7 +87,7 @@ class PruebasController extends Controller
                     $correcto[] = '';
                 }
             }
-        }
+        }*/
         
         $unidades = intVal($request->input('unidad'));
         $tipos = intVal($request->input('tipo'));
@@ -96,33 +96,27 @@ class PruebasController extends Controller
 
         $nuevo = new Respuesta();
 
-        //arrays
-        foreach($respondida_alumno as $res_id){
-            $nuevo->respondidas_id = $res_id;
-            
-        }
-        foreach($respuesta_correcta as $resc_id){
-            $nuevo->correcta_id = $resc_id;
-        }
-        foreach($preguntas_id as $pre_id){
-            $nuevo->pregunta_id = $pre_id;  
-        }
+        $result_array = array_intersect_assoc($respondida_alumno, $respuesta_correcta);
 
-        for($i=0; $i<=2; $i++)
-        {
-            $nuevo->alumno_id = 1;
-            $nuevo->unidad_id = $unidades;
-            $nuevo->tipo_id =  $tipos;
-            $nuevo->materia_id = $materias;
-            $nuevo->respondidas_id = $respondida_alumno;
-            $nuevo->correcta_id = $respuesta_correcta;
-            $nuevo->pregunta_id = $preguntas_id;
+        $count_point = count($result_array);
 
-            
-            return response()->json($nuevo);
-        }
+       
+                $nuevo->alumno_id = 2;
+                $nuevo->unidad_id = $unidades;
+                $nuevo->tipo_id =  $tipos;
+                $nuevo->materia_id = $materias;
+                $nuevo->points = $count_point * 2;
+                $respondida = implode(', ', $respondida_alumno);
+                $correcta = implode(', ', $respuesta_correcta);
+                $pregunta = implode(', ', $preguntas_id);
+                $nuevo->respondidas_id = $respondida;
+                $nuevo->correcta_id = $correcta;
+                $nuevo->pregunta_id = $pregunta;
+
+       // return response()->json($nuevo);
          
         $nuevo->save();
+        return 'se a guardado el registro';
         
     }
 
