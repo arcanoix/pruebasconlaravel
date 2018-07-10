@@ -14,6 +14,9 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">-->
+       
+            <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
        <style>
        
        </style>
@@ -65,5 +68,103 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+            <script>
+  
+ 
+   
+
+
+    // CARGAR DATOS DESDE VIA AJAX USANDO JSGRID
+           
+           /*$.ajax({
+                type:'GET',
+                url: '/user'
+
+            }).done(function(res){
+              
+                 $("#jsGrid").jsGrid({
+                    width: "100%",
+                    height: "400px",
+             
+                    inserting: true,
+                    editing: true,
+                    sorting: true,
+                    paging: true,
+             
+                    data: res,
+             
+                    fields: [
+                        { name: "name", type: "text", width: 150, validate: "required" },
+                        { name: "email", type: "text", width: 200 },
+                        { type: "control" }
+                    ]
+                });
+
+
+
+            });*/
+
+
+// INTENTANDO OTRO METODO
+$(document).ready(function() {
+
+                    $("#jsGrid").jsGrid({
+                    width: "100%",
+                    height: "400px",
+             
+                    inserting: true,
+                    editing: true,
+                    sorting: true,
+                    paging: true,
+                    autoload: true,
+             
+                     controller: {
+                         loadData: function(filter) { 
+                               
+                               return $.ajax({
+                                    type: "GET",
+                                    url: "/user",
+                                    data: filter
+                                });
+
+                               console.log(filter);
+
+                         },
+                         insertItem: function(item) {
+                             console.log(item);
+                         },
+                         updateItem: function(item) {
+                             console.log(item)
+                         }
+                        },
+                         deleteItem: function(item) {
+                             $.ajax("/api/members/", {
+                                 data: { item: item},
+                                 dataType: "json",
+                                 error: function(err) { console.log(err);},
+                                 method: "DELETE",
+                                 success: function(result, status, jqXHR) {},
+                             })
+                         },
+             
+                    fields: [
+                        { name: "name", type: "text", width: 150, validate: "required" },
+                        { name: "email", type: "text", width: 200 },
+                        { type: "control" }
+                    ]
+                });
+
+
+          
+
+});
+               
+
+
+
+</script>
     </body>
 </html>
