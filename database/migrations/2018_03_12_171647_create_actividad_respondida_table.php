@@ -27,7 +27,7 @@ class CreateActividadRespondidaTable extends Migration
                  $table->foreign('actividad_id')->references('id')->on('actividad');
                 $table->foreign('user_id')->references('id')->on('users');
 
-                $table->foreaign('materia_id')->references('id')->on('materias');
+                $table->foreign('materia_id')->references('id')->on('materias');
 
 
 
